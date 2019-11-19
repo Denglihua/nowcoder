@@ -1,3 +1,12 @@
+import javafx.beans.binding.StringExpression;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.security.PublicKey;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @program: nowcoder
  * @description:
@@ -5,16 +14,12 @@
  * @create: 2019-06-17 19:04
  **/
 public class helloworld {
-    private void backTrace(int n){
-        if(n==5){
-            System.out.println("cc");
-        }else {
-            backTrace(n+1);
-        }
-    }
-
     public static void main(String[] args) {
-        helloworld hw=new helloworld();
-        hw.backTrace(2);
+        Pattern pattern=Pattern.compile("([a-zA-Z]?\\([0-9a-zA-Z],[0-9a-zA-Z]\\))");
+        Matcher matcher=pattern.matcher("A(3,2)");
+        while(matcher.find()){
+            System.out.println(matcher.group());
+        }
+
     }
 }
