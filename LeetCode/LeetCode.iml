@@ -6,6 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/backTrack" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Dynamic" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BinarySearch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/stringProblem" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/list" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BFS" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

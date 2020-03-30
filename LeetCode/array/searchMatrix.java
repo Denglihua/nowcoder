@@ -10,8 +10,7 @@
  */
 public class searchMatrix {
     /**
-     * 思路：（从矩阵的左下角matrix[m][0]开始搜索，matrix[m][0]>target,像上一行移动 m--；matrix[m][0]<target
-     * 像右移动一列）
+     * 思路：（从矩阵的左下角matrix[m][0]开始搜索，matrix[m][0]>target,像上一行移动 m--；matrix[m][0]<target,像右移动一列）
      * @param matrix
      * @param target
      * @return
