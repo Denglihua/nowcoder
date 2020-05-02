@@ -7,19 +7,27 @@
  */
 public class rotate {
     /**
-     * 思路：发现规律，先将数组的第0列与第n列交换，1与n-1,,,再交换数组角标即可得到新的旋转90度的图像
+     * (i,j)---->(j,len-i-1)
      * @param matrix
      */
     public void rotate(int[][] matrix) {
-//        for(int i=0;i<matrix.length;i++){
-//            for(int j=0;j<matrix.length;j++){
-//                int temp=0;
-//                temp=matrix[i][j];
-//                matrix[i][j]=matrix[i][matrix.length-1-j];
-//                matrix[i][matrix.length-1-j]=
-//
-//
-//            }
-//        }
+        int N=matrix.length;
+        int [][] temp=new int[N][N];
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                temp[i][j]=matrix[i][j];
+            }
+        }
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                matrix[j][N-1-i]=temp[i][j];
+            }
+        }
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                System.out.print(matrix[i][j]+" ");
+            }
+            System.out.println();
+        }
     }
 }

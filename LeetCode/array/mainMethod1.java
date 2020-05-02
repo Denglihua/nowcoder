@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,8 +9,12 @@ import java.util.List;
  */
 public class mainMethod1 {
     public static void main(String[] args) {
-        hasGroupsSizeX hs=new hasGroupsSizeX();
-        int a[]=new int[]{1,1,1,2,2,2,3,3};
-        System.out.println(hs.hasGroupsSizeX(a));
+       ListNode head=new ListNode(1);
+       head.add(2);
+       head.add(3);
+       head.add(4);
+       head.add(5);
+        System.out.println(head.FindKthToTail(head,1).val);
     }
+
 }

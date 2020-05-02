@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
  **/
 public class helloworld {
     public static void main(String[] args) {
-        Pattern pattern=Pattern.compile("([a-zA-Z]?\\([0-9a-zA-Z],[0-9a-zA-Z]\\))");
-        Matcher matcher=pattern.matcher("A(3,2)");
+        Pattern pattern=Pattern.compile("(lg\\([a-z]_[a-zA-Z0-9]\\))");
+        Matcher matcher=pattern.matcher("lg(a_n)");
         while(matcher.find()){
             System.out.println(matcher.group());
         }

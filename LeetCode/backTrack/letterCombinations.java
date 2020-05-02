@@ -25,6 +25,9 @@ public class letterCombinations {
 
 
     public List<String> letterCombinations(String digits) {
+        if(digits.equals("")){
+            return list;
+        }
         backTrack("",digits);
         return list;
     }
@@ -44,6 +47,6 @@ public class letterCombinations {
 
     public static void main(String[] args) {
         letterCombinations lc=new letterCombinations();
-        System.out.println(lc.letterCombinations("23456"));
+        System.out.println(lc.letterCombinations(""));
     }
 }

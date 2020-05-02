@@ -1,3 +1,7 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * @Program:nowcoder
  * @description:爬楼梯（三步问题。有个小孩正在上楼梯，楼梯有n阶台阶，小孩一次可以上1阶、2阶或3阶。
@@ -35,6 +39,36 @@ public class climbStairs {
 
     public static void main(String[] args) {
         climbStairs cm=new climbStairs();
-        System.out.println(cm.waysToStep(61));
+        System.out.println(cm.floor(00));
+    }
+
+    //利用hash表保存，减少空间复杂度
+    private HashMap<Integer,Integer> value=new HashMap<>();
+    public int climbStairs(int n){
+        if(value.containsKey(n)){
+            return value.get(n);
+        }
+        int res=0;
+        if(n<3){
+            return n;
+        }else {
+            res=(climbStairs(n-1)+climbStairs(n-2));
+        }
+        value.put(n,res);
+        return res;
+    }
+
+    /**
+     * 当返回结果超过整型
+     * @param n
+     * @return
+     */
+    public int floor(int n){
+        ArrayList<BigInteger> list = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            BigInteger temp = (i <= 2) ? BigInteger.valueOf(i) : list.get(i - 2).add(list.get(i - 3));
+            list.add(temp);
+        }
+        return list.get(list.size() - 1).intValue();
     }
 }
