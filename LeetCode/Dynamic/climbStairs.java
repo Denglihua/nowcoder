@@ -37,10 +37,7 @@ public class climbStairs {
         return temp;
     }
 
-    public static void main(String[] args) {
-        climbStairs cm=new climbStairs();
-        System.out.println(cm.floor(00));
-    }
+
 
     //利用hash表保存，减少空间复杂度
     private HashMap<Integer,Integer> value=new HashMap<>();
@@ -71,4 +68,9 @@ public class climbStairs {
         }
         return list.get(list.size() - 1).intValue();
     }
+    public static void main(String[] args) {
+        climbStairs cm=new climbStairs();
+        System.out.println(cm.floor(10000%3));
+    }
+
 }

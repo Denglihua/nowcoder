@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @program: nowcoder
@@ -39,13 +38,55 @@ public class letterCasePermutation {
             return 0;
         }
     }
+
+    /**
+     * 字母大小写的全排列
+     * @param S
+     * @return
+     */
     public List<String> letterCasePermutation(String S) {
         backTrack("",S);
         return list;
     }
 
+    /**
+     * 小写字母的全排列
+     * @param str
+     * @return
+     */
+    ArrayList<String> res=new ArrayList<>();
+    char[] c;
+    public ArrayList<String> Permutation(String str) {
+        c=str.toCharArray();
+        dfs(0);
+        Collections.sort(res);
+        return res;
+    }
+
+    public void dfs(int index){
+        if(index==c.length-1){
+            res.add(String.valueOf(c));
+            return;
+        }
+        HashSet<Character> set=new HashSet();
+        for(int i=index;i<c.length;i++){
+            //剪枝
+            if(set.contains(c[i]))
+                continue;
+            set.add(c[i]);
+            swap(i,index);
+            dfs(index+1);
+            swap(i,index);
+        }
+    }
+    private void swap(int x,int y){
+        char temp=c[x];
+        c[x]=c[y];
+        c[y]=temp;
+    }
     public static void main(String[] args) {
         letterCasePermutation lcp=new letterCasePermutation();
-        System.out.println(lcp.letterCasePermutation("C"));
+        System.out.println(lcp.Permutation("abb"));
+        int[] a=new int[10];
     }
 }

@@ -27,15 +27,9 @@ public class swapPairs {
     }
 
     public static void main(String[] args) {
-        swapPairs sp=new swapPairs();
-        ListNode addnode=new ListNode(3);
-        addnode.add(2);
-        addnode.print();
-        System.out.println();
-        addnode=addnode.reverseList(addnode);
-        addnode.print();
-        System.out.println();
-        addnode=sp.swapPairs(addnode);
-        addnode.print();
+        ListNode list=new ListNode(1);
+        list.add(0);
+        list.add(1);
+        System.out.println(list.getDecimalValue(list));
     }
 }

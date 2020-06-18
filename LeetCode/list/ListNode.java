@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @Program:nowcoder
@@ -68,6 +66,49 @@ public class ListNode {
             cur=temp;
         }
         return prev;
+    }
+
+    /**
+     * k个一组翻转链表
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        int cnt=0;
+        ListNode prev=null;
+        ListNode cur=head;
+        //k个链表翻转
+        while (cur!=null&&cnt<k){
+            ListNode temp=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=temp;
+            cnt++;
+        }
+        head.next = reverseKGroup(cur,k);
+        return prev;
+    }
+
+    /**
+     * 交换两个节点
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+        //没有节点或者只有一个节点
+        if(head==null||head.next==null){
+            return head;
+        }
+        //第一个和第二个节点
+        ListNode fir=head;
+        ListNode sec=head.next;
+
+        //交换两个节点
+        fir.next=swapPairs(sec.next);//通过递归，fir.next就是第二个节点下一个节点
+        sec.next=fir;
+
+        return sec;
     }
     //合并两个有序链表
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -260,5 +301,53 @@ public class ListNode {
             k=sum/10;
         }
         return ans;
+    }
+
+    /**
+     * 二进制链表转整数
+     * @param head
+     * @return
+     */
+    public int getDecimalValue(ListNode head) {
+        ListNode temp=reverseList(head);
+        int ans=0;
+        int bit=0;
+        while (temp!=null){
+            if(temp.val==1){
+                int re=1;
+                for(int i=0;i<bit;i++){
+                    re=re<<1;
+                }
+                ans+=re;
+                bit++;
+                temp=temp.next;
+            }else {
+                bit++;
+                temp=temp.next;
+                continue;
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 删除重复出现的数
+     * @param pHead
+     * @return
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode pNode=head.next;
+        if(head.val==pNode.val){
+            while (pNode!=null&&head.val==pNode.val){
+                pNode=pNode.next;
+            }
+            head=deleteDuplicates(pNode);
+        }else {
+            head.next=deleteDuplicates(pNode);
+        }
+        return head;
     }
 }

@@ -13,6 +13,7 @@ public class TreeNode {
     TreeNode(int x){
         val=x;
     }
+    TreeNode(){}
     //递归方式获得二叉树的最大深度
     public int maxDepth(TreeNode root) {
         return root==null?0:Math.max(maxDepth(root.left),maxDepth(root.right))+1;
@@ -201,25 +202,163 @@ public class TreeNode {
      * @param root
      * @return
      */
-
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> res=new ArrayList<>();
-        Queue<TreeNode> queue=new LinkedList<>();
-        if(root==null){
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
             return res;
         }
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while (!queue.isEmpty()){
-            TreeNode front=queue.poll();
-            res.add(front.val);
-            if(front.left!=null){
-                queue.offer(root.left);
-            }
-            if(front.right!=null){
-                queue.offer(root.right);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+                if (i == size - 1) {  //将当前层的最后一个节点放入结果列表
+                    res.add(node.val);
+                }
             }
         }
         return res;
+    }
+    //判断两颗二叉树是不是同样的二叉树
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null&&q==null){
+            return true;
+        }
+        if(p==null||q==null) return false;
+        if(p.val!=q.val) return false;
+        return isSameTree(p.left,q.left)&&isSameTree(p.right,q.right);
+    }
+    //t是不是s的子树
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(isSameTree(s,t)){
+            return true;
+        }
+        if(s==null&&t!=null){
+            return false;
+        }
+        return isSubtree(s.left,t)||isSubtree(s.right,t);
+    }
+
+    /**
+     * 二叉树的每一层元素
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> ans=new ArrayList<>();
+        if(root==null){
+            return ans;
+        }
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size=queue.size();
+            List<Integer> temp=new ArrayList<>();
+            for(int i=0;i<size;i++){
+                TreeNode node=queue.poll();
+                if(node.left!=null){
+                    queue.add(node.left);
+                }
+                if(node.right!=null){
+                    queue.add(node.right);
+                }
+                temp.add(node.val);
+            }
+            ans.add(0,temp);
+        }
+        return ans;
+    }
+
+    /**
+     * 判断一棵二叉树是不是二叉搜索树
+     */
+    long pre=Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        //访问左子树
+        if(!isValidBST(root.left)){
+            return  false;
+        }
+        //访问当前节点，如果值小于前一个，返回false;
+        if(root.val<=pre){
+            return false;
+        }
+        //访问右子树
+        pre=root.val;
+        return isValidBST(root.right);
+    }
+
+    /**
+     * 基于栈实现的中序遍历
+     * @param root
+     * @return
+     */
+    public List < Integer > inorderTraversal(TreeNode root) {
+        List < Integer > res = new ArrayList < > ();
+        Stack < TreeNode > stack = new Stack < > ();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            res.add(curr.val);
+            curr = curr.right;
+        }
+        return res;
+    }
+    //基于栈实现的后序遍历
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+        Stack<TreeNode> toVisit = new Stack<>();
+        TreeNode cur = root;
+        TreeNode pre = null;
+        while (cur != null || !toVisit.isEmpty()) {
+            while (cur != null) {
+                toVisit.push(cur); // 添加根节点
+                cur = cur.left; // 递归添加左节点
+            }
+            cur = toVisit.peek(); // 已经访问到最左的节点了
+            //在不存在右节点或者右节点已经访问过的情况下，访问根节点
+            if (cur.right == null || cur.right == pre) {
+                toVisit.pop();
+                result.add(cur.val);
+                pre = cur;
+                cur = null;
+            } else {
+                cur = cur.right; // 右节点还没有访问过就先访问右节点
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 找树中两个节点最近的父亲节点
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==p||root==q||root==null){
+            return  root;
+        }
+        TreeNode left=lowestCommonAncestor(root.left,p,q);
+        TreeNode right=lowestCommonAncestor(root.right,p,q);
+        if(left!=null&&right!=null){
+            return root;
+        }
+        return left==null?right:left;
     }
 }
 

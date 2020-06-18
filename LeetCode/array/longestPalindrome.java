@@ -25,4 +25,28 @@ public class longestPalindrome {
             return ans < s.length() ? ans + 1 : ans;
 
     }
+    //给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+    public boolean validPalindrome(String s) {
+        boolean flag=true;
+        int start=0;
+        int end=s.length()-1;
+        while (start<end){
+            if(s.charAt(start)==s.charAt(end)){
+                start++;
+                end--;
+            } else {
+                if(flag==true){
+                    return validPalindrome(s.substring(start+1,end)) || validPalindrome(s.substring(start,end-1));
+                }
+                flag=false;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        longestPalindrome lp=new longestPalindrome();
+        System.out.println(lp.validPalindrome("abc"));
+    }
 }
